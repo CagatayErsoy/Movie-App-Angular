@@ -1,0 +1,52 @@
+<ng-container *ngIf="movie; else movieNotAvailable">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        <!-- getting img from Api - need to make another request -->
+        <img
+          *ngIf="movie?.poster_path"
+          src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
+          [alt]="movie.title"
+          class="front_img"
+        />
+
+        <h1>{{ movie.title }}</h1>
+        <p class="year front_year">
+          <span>{{ movie.release_date | date: "yyyy" }}</span>
+        </p>
+      </div>
+
+      <div class="flip-card-back">
+        <div class="img-container">
+          <!-- getting img from Api - need to make another request -->
+          <img
+            *ngIf="movie?.poster_path"
+            src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
+            [alt]="movie.title"
+            class="back_img"
+          />
+        </div>
+        <!-- href="#" -->
+        <span class="play_icon"  (click)="onClickPlay()">
+          <img src="../../assets/playIcon.png" alt="play_icon" />
+        </span>
+        <p class="rate">
+          Rated:<span>{{ movie.vote_average | number: "1.0-1" }}</span> /10
+        </p>
+          <h1 class="title_back">{{ movie.title}}
+          </h1>
+          <p class="year year_back">
+            <span>
+              {{movie.release_date | date: 'yyyy'}}
+            </span>
+          </p>
+        </div>
+
+        </div>
+  </div>
+</ng-container>
+<ng-template #movieNotAvailable>
+  <div>
+    <h1>Movie Not Available</h1>
+  </div>
+</ng-template>

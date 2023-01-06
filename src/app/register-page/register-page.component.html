@@ -1,0 +1,91 @@
+<p class="logo">KCBFLEX</p>
+<div class="backgroundImage">
+<div class="form-group">
+  <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+    <div class="container">
+      <h1 id="sign_up">Sign Up</h1>
+
+      <input
+        formControlName="email"
+        type="text"
+        placeholder="Email"
+        name="email"
+        id="email"
+        required
+      />
+      <div
+        class="errorMsg"
+        *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+      >
+        <div *ngIf="email?.errors?.['required']">Email is required.</div>
+        <div *ngIf="email?.errors?.['email']">
+          Email must be a valid email address
+        </div>
+      </div>
+      <input
+        type="text"
+        #username
+        formControlName="username"
+        name="username"
+        id="usename"
+        placeholder="Username (Optional)"
+      />
+
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="New password"
+        name="new-password"
+        id="new-password"
+        required
+      />
+      <div
+        class="errorMsg"
+        *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+      >
+        <div *ngIf="password?.errors?.['required']">Password is required.</div>
+        <div *ngIf="password?.errors?.['pattern']">
+          Your password must contain minimum eight characters, at least one
+          letter and one number
+        </div>
+      </div>
+      <!-- value="Abc1234@" -->
+
+      <input
+        formControlName="repeatPassword"
+        type="password"
+        placeholder="Repeat new-password"
+        name="new-password-repeat"
+        id="new-password-repeat"
+        #passwordRepeat
+        required
+      />
+      <div
+        class="errorMsg"
+        *ngIf="repeatPassword?.dirty&&signUpForm?.errors?.['nomatch']"
+      >
+        passwords don't match
+      </div>
+      <br />
+
+      <p>
+        By creating an account you agree to our <a href="#">Terms & Privacy</a>.
+      </p>
+      <button type="submit" class="registerbtn">Register</button>
+      <div class="errorMsg" *ngIf="signUpClicked">
+        <div class="errorMsg" *ngIf="signUpForm?.invalid">
+          Please fill required details
+        </div>
+      </div>
+
+      <div class="errorMsg" *ngIf="emailExists">
+        This email address already exists, please enter a new email address
+      </div>
+    </div>
+
+    <div class="container signin">
+      <p>Already have an account? <a (click)="navigateToSignIn()" >Sign in</a>.</p>
+    </div>
+  </form>
+</div>
+</div>
